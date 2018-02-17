@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+
+    h2 Generate
+    p Get a random date with question number
+    br
+    button#btnRandomize Random!
+    #randomizedInfo
+        p
+            strong Date:
+            |  <span id='date'></span>
+            br
+            strong Question number:
+            |  <span id='questionNumber'></span>
+
+    h2 Assigned days
+    p Manualy link a date with a question number
+    br
+    #linkDateAndQuestion
+        fieldset
+            input#inputDate(type='text', placeholder='Date')
+            br
+            input#inputQuestionNumber(type='text', placeholder='Question number')
+            br
+            button#btnAddUser Submit
+            button#btnAddUser Cancel
