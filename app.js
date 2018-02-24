@@ -7,16 +7,7 @@ var bodyParser = require('body-parser');
 
 var mysql = require('mysql');
 
-if(process.env.NODE_ENV === "production") {
-    var mysqlPool =
-        mysql.createPool({
-            host: 'us-cdbr-iron-east-05.cleardb.net',
-            port: 3306,
-            user: 'b38acc539b795e',
-            password: '6b815cb4',
-            database: 'heroku_2dcb3a809c014d7'
-        });
-} else {
+
     var mysqlPool =
         mysql.createPool({
             host: 'localhost',
@@ -25,7 +16,6 @@ if(process.env.NODE_ENV === "production") {
             password: 'password',
             database: 'RANDOMIZER'
         });
-}
 
 global.mysqlClient = (global.mysql ? global.mysql : mysqlPool);
 
