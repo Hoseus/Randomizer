@@ -4,7 +4,7 @@ var service = require('../service/QuestionService');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/randomize', function(req, res) {
+router.get("/random", function(req, res) {
     mysqlClient.query("SELECT * FROM QUESTION", function (err, result) {
         if (err) throw err;
 
@@ -23,6 +23,18 @@ router.get('/randomize', function(req, res) {
 
         res.status(200).send(question);
     });
+});
+
+router.post("", function(req, res) {
+    mysqlClient.query(
+        "INSERT INTO QUESTION (question_id, question_day, question_month)" +
+        "VALUES ( " + req.body.id + ", " + req.body.day + ", " + req.body.month + " )",
+        function (err, result) {
+            if (err) throw err;
+
+            res.status(200).send("OK");
+        }
+    );
 });
 
 module.exports = router;

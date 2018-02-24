@@ -6,6 +6,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Randomizer' });
 });
 
-router.use('/question', require('./QuestionController'))
+router.use('/question', require('./QuestionController'));
 
 module.exports = router;

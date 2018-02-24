@@ -7,8 +7,8 @@ block content
     h2 Generate
     p Get a random date with question number
     br
-    button#btnRandomizeQuestion Random!
-    #question
+    button#btnGetRandomQuestion Random!
+    #getRandomQuestion
         p
             strong Question Date:
             |  <span id='questionDate'></span>
@@ -16,14 +16,17 @@ block content
             strong Question number:
             |  <span id='questionId'></span>
 
+    button#btnSubmitRandomQuestion Submit
+    button#btnCancelRandomQuestion Cancel
+
     h2 Assigned days
     p Manualy link a date with a question number
     br
-    #linkDateAndQuestion
+    #createQuestion
         fieldset
             input#inputDate(type='text', placeholder='Date')
             br
-            input#inputQuestionNumber(type='text', placeholder='Question number')
+            input#inputQuestionId(type='text', placeholder='Question number')
             br
             button#btnSubmitQuestion Submit
             button#btnCancelQuestion Cancel
