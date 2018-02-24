@@ -1,3 +1,4 @@
+var _ = require('underscore');
 var commonModels = require('../model/CommonModels');
 var questionModels = require('../model/QuestionModels');
 
@@ -15,28 +16,34 @@ questionService = {
     },
 
     getRandomQuestionId: function(forbiddenValues) {
-        var possibleIds = _.range(1, 366);
+        var possibleIds = _.range(1, 367);
 
         var remainingPossibleIds = possibleIds.filter(function (element) {
-            return forbiddenValues.includes(element);
+            return !forbiddenValues.includes(element);
         });
 
-        return _.shuffle(remainingPossibleIds)[_.random(remainingPossibleIds.length - 1)];
+        var randomId = _.shuffle(remainingPossibleIds)[_.random(1, remainingPossibleIds.length - 1)];
+
+        if(randomId) {
+            return randomId;
+        } else {
+            //throw e
+        }
     },
 
     getRandomDayAndMonth: function(forbiddenValues) {
-        var forbidenValuesAsDates = result.map(function(element) {
+        var forbidenValuesAsDates = forbiddenValues.map(function(element) {
             return new Date(2018, element.month, element.day);
         });
         var randomDate = this.getRandomDate(forbidenValuesAsDates);
 
-        return {day: randomDate.getDay(), month: randomDate.getMonth()};
+        return {"day": randomDate.getDate(), "month": randomDate.getMonth() + 1}
     },
 
     getRandomDate: function(forbiddenValues) {
         var possibleDates = [];
-        firstDate = new Date(2018, 1, 1);
-        lastDate = new Date(2018, 12, 31);
+        var firstDate = new Date(2018, 0, 1);
+        var lastDate = new Date(2018, 12, 31);
 
         possibleDates.push(firstDate);
         while (firstDate < lastDate) {
@@ -44,11 +51,17 @@ questionService = {
             possibleDates.push(new Date(firstDate));
         }
 
-        var remainingPossibleDates = possibleIds.filter(function (element) {
-            return forbiddenValues.includes(element);
+        var remainingPossibleDates = possibleDates.filter(function (element) {
+            return !forbiddenValues.includes(element);
         });
 
-        return _.shuffle(remainingPossibleDates)[_.random(remainingPossibleDates.length - 1)];
+        var randomDate = _.shuffle(remainingPossibleDates)[_.random(1, remainingPossibleDates.length - 1)];
+
+        if(randomDate) {
+            return randomDate;
+        } else {
+            //throw e
+        }
     }
 };
 
