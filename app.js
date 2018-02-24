@@ -7,25 +7,7 @@ var bodyParser = require('body-parser');
 
 var mysql = require('mysql');
 
-if(process.env.NODE_ENV === "production") {
-    var mysqlPool =
-        mysql.createPool({
-            host: 'us-cdbr-iron-east-05.cleardb.net',
-            port: 3306,
-            user: 'b38acc539b795e',
-            password: '6b815cb4',
-            database: 'heroku_2dcb3a809c014d7'
-        });
-} else {
-    var mysqlPool =
-        mysql.createPool({
-            host: 'localhost',
-            port: 3306,
-            user: 'root',
-            password: 'password',
-            database: 'RANDOMIZER'
-        });
-}
+var mysqlPool = mysql.createPool(process.env.RELATIONAL_DATABASE_URL);
 
 global.mysqlClient = (global.mysql ? global.mysql : mysqlPool);
 
