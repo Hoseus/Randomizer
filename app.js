@@ -5,8 +5,21 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var mysql = require('mysql');
+
+var mysqlPool  =
+    mysql.createPool({
+        host: 'localhost',
+        port: 3306,
+        user: 'root',
+        password: 'password',
+        database: 'RANDOMIZER'
+    });
+
+global.mysqlClient = (global.mysql ? global.mysql : mysqlPool);
+
 var index = require('./routes/index');
-var users = require('./routes/users');
+var users = require('./routes/QuestionController');
 
 var app = express();
 
